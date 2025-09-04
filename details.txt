@@ -1,0 +1,14 @@
+{
+    "email": "22l31a05m0@gmail.com",
+    "name": "thandra snadhya rani",
+    "rollNo": "22l31a05m0",
+    "accessCode": "YzuJeU",
+    "clientID": "0f5afb83-44ed-433b-8121-3c977d83a6a7",
+    "clientSecret": "cbJxghpWGwvBEqtu"
+}
+
+{
+    "token_type": "Bearer",
+    "access_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJNYXBDbGFpbXMiOnsiYXVkIjoiaHR0cDovLzIwLjI0NC41Ni4xNDQvZXZhbHVhdGlvbi1zZXJ2aWNlIiwiZW1haWwiOiIyMmwzMWEwNW0wQGdtYWlsLmNvbSIsImV4cCI6MTc1Njk2NDY3OSwiaWF0IjoxNzU2OTYzNzc5LCJpc3MiOiJBZmZvcmQgTWVkaWNhbCBUZWNobm9sb2dpZXMgUHJpdmF0ZSBMaW1pdGVkIiwianRpIjoiOGEwMzZlNTItZDU4MC00OTU2LWE5MWMtZTEwNTQ1MWQ2MDc2IiwibG9jYWxlIjoiZW4tSU4iLCJuYW1lIjoidGhhbmRyYSBzbmFkaHlhIHJhbmkiLCJzdWIiOiIwZjVhZmI4My00NGVkLTQzM2ItODEyMS0zYzk3N2Q4M2E2YTcifSwiZW1haWwiOiIyMmwzMWEwNW0wQGdtYWlsLmNvbSIsIm5hbWUiOiJ0aGFuZHJhIHNuYWRoeWEgcmFuaSIsInJvbGxObyI6IjIybDMxYTA1bTAiLCJhY2Nlc3NDb2RlIjoiWXp1SmVVIiwiY2xpZW50SUQiOiIwZjVhZmI4My00NGVkLTQzM2ItODEyMS0zYzk3N2Q4M2E2YTciLCJjbGllbnRTZWNyZXQiOiJjYkp4Z2hwV0d3dkJFcXR1In0.gSOlKXB8qtVyA4kXJXJ_oldyLP5Df4UxaI3bokaon8M",
+    "expires_in": 1756964679
+}
