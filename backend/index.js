@@ -1,20 +1,24 @@
 const express = require('express');
 const cors = require('cors');
+const helmet = require('helmet');
 const { PrismaClient } = require('@prisma/client');
 const logger = require('../logging-middleware');
 const shortUrlsRouter = require('./routes/shorturls');
+const leaderboardRouter = require('./routes/leaderboard');
 
 const app = express();
 const prisma = new PrismaClient();
 const PORT = process.env.PORT || 5001;
 
 // Middleware
+app.use(helmet());
 app.use(cors());
 app.use(express.json());
 app.use(logger);
 
 // Routes
 app.use('/shorturls', shortUrlsRouter);
+app.use('/leaderboard', leaderboardRouter);
 
 // GET /:shortcode - Redirect to original URL
 app.get('/:shortcode', async (req, res) => {

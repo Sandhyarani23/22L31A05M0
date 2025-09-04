@@ -1,6 +1,8 @@
 const express = require('express');
 const { PrismaClient } = require('@prisma/client');
 const { nanoid } = require('nanoid');
+const QRCode = require('qrcode');
+const validator = require('validator');
 
 const router = express.Router();
 const prisma = new PrismaClient();
@@ -14,11 +16,10 @@ router.post('/', async (req, res) => {
       return res.status(400).json({ error: 'URL is required' });
     }
 
-    // Validate URL format
-    try {
-      new URL(url);
-    } catch {
-      return res.status(400).json({ error: 'Invalid URL format' });
+    // Enhanced URL validation
+    const trimmedUrl = url.trim();
+    if (!validator.isURL(trimmedUrl, { protocols: ['http', 'https'], require_protocol: true })) {
+      return res.status(400).json({ error: 'Invalid URL format. Must be http:// or https://' });
     }
 
     // Generate shortcode if not provided
@@ -42,17 +43,28 @@ router.post('/', async (req, res) => {
     // Create short URL
     const shortUrl = await prisma.shortUrl.create({
       data: {
-        originalUrl: url,
+        url: trimmedUrl,
         shortcode: finalShortcode,
-        expiry: expiry
+        validity: expiry
       }
     });
 
-    const shortLink = `http://localhost:5000/${finalShortcode}`;
+    const shortLink = `http://localhost:5001/${finalShortcode}`;
+
+    // Generate QR Code
+    const qrCodeDataURL = await QRCode.toDataURL(shortLink, {
+      width: 200,
+      margin: 2,
+      color: {
+        dark: '#000000',
+        light: '#FFFFFF'
+      }
+    });
 
     res.json({
       shortLink,
-      expiry: expiry.toISOString()
+      expiry: expiry.toISOString(),
+      qrCode: qrCodeDataURL
     });
 
   } catch (error) {
@@ -80,8 +92,8 @@ router.get('/:shortcode', async (req, res) => {
     }
 
     res.json({
-      originalUrl: shortUrl.originalUrl,
-      expiry: shortUrl.expiry.toISOString(),
+      originalUrl: shortUrl.url,
+      expiry: shortUrl.validity.toISOString(),
       totalClicks: shortUrl.clicks.length,
       logs: shortUrl.clicks.map(click => ({
         timestamp: click.timestamp.toISOString(),
